@@ -1,0 +1,16 @@
+#!/sbin/ash
+
+mknod /dev/null    c 1 3
+mknod /dev/ptmx    c 4 2
+mknod /dev/ram0    b 1 0
+mknod /dev/tty0    c 5 0
+mknod /dev/ttyS0   c 4 64
+
+mount /proc
+mount /sys
+
+PATH=/sbin
+
+export NCPUS=`grep processor /proc/cpuinfo | wc -l`
+
+poweroff -f
