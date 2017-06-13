@@ -4,10 +4,11 @@
 # NOTE: This is optional. The binary of busybox distributed with QSim should
 # work perfectly adequately.
 
-ARCH=x86
+ARCH=arm64
+CROSS=aarch64-linux-gnu-
 if [ ! -z "$1" ]; then
-  CROSS=aarch64-linux-gnu-
-  ARCH=arm64
+    ARCH=x86
+    CROSS=
 fi
 
 BBOX=busybox-1.24.1
@@ -44,4 +45,3 @@ make -j4 CROSS_COMPILE=$CROSS
 cp busybox ../sbin/
 cd ../
 make clean && make $ARCH
-cp -f initrd.cpio initrd.cpio.$ARCH
