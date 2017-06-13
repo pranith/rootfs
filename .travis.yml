@@ -13,6 +13,7 @@ addons:
         - g++-aarch64-linux-gnu
         - bc
         - git
+        - qemu-user
 before_install:
     - git clone --recursive https://github.com/qemu/qemu
     - cd qemu
