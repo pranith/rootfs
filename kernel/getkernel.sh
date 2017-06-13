@@ -1,5 +1,6 @@
 #!/bin/sh
 # Download and patch Linux kernel
+echo === KERNEL ===
 KERNEL=linux-4.9.31
 KERNEL_ARC=$KERNEL.tar.xz
 KERNEL_URL=https://www.kernel.org/pub/linux/kernel/v4.x/$KERNEL_ARC

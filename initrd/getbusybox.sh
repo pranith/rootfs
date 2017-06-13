@@ -1,5 +1,6 @@
 #!/bin/bash
 # Download and configure busybox.
+echo === INITRD ===
 
 # NOTE: This is optional. The binary of busybox distributed with QSim should
 # work perfectly adequately.
