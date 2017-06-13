@@ -17,10 +17,6 @@ BBOX_URL=https://www.busybox.net/downloads/$BBOX_ARCHIVE
 
 UNPACK="tar -xjf"
 
-pushd ../linux
-LINUX_DIR=`pwd`/linux/
-popd
-
 # Download the archive if we don't already have it.
 if [ ! -e $BBOX_ARCHIVE ]; then
   echo === DOWNLOADING ARCHIVE ===
@@ -28,20 +24,17 @@ if [ ! -e $BBOX_ARCHIVE ]; then
 fi
 
 # Delete the busybox directory if it already exists.
-if [ -e $BBOX ]; then
-  rm -r $BBOX
+if [ ! -e $BBOX ]; then
+    echo === UNPACKING ARCHIVE ===
+    $UNPACK $BBOX_ARCHIVE
+
+    echo === COPYING CONFIG ===
+    cp busybox-config $BBOX/.config
+
+    echo == BUILDING ==
+    cd $BBOX
+    make -j4 ARCH=$ARCH CROSS_COMPILE=$CROSS
+    cp busybox ../sbin/
+    cd ../
+    make clean && make $ARCH
 fi
-
-echo === UNPACKING ARCHIVE ===
-$UNPACK $BBOX_ARCHIVE
-
-echo === COPYING CONFIG ===
-sed "s#\\%LINUX_DIR\\%#$LINUX_DIR#g" < busybox-config \
-  > $BBOX/.config
-
-echo == BUILDING ==
-cd $BBOX
-make -j4 CROSS_COMPILE=$CROSS
-cp busybox ../sbin/
-cd ../
-make clean && make $ARCH

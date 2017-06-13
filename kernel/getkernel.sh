@@ -7,20 +7,22 @@ UNPACKAGE="tar -xf"
 
 INITRD=`pwd`/initrd/initrd.cpio
 
-# Only download the archive if we don't alreay have it.
-if [ ! -e $KERNEL_ARC ]; then
-  echo === DOWNLOADING ARCHIVE ===
-  wget $KERNEL_URL
-fi
+if [ ! -e $INITRD ]; then
+    # Only download the archive if we don't alreay have it.
+    if [ ! -e $KERNEL_ARC ]; then
+	echo === DOWNLOADING ARCHIVE ===
+	wget $KERNEL_URL
+    fi
 
-# unpack if kernel does not exists
-if [ ! -e linux ]; then
-    echo === UNPACKING ARCHIVE ===
-    $UNPACKAGE $KERNEL_ARC
-    mv $KERNEL linux
-fi
+    # unpack if kernel does not exists
+    if [ ! -e linux ]; then
+	echo === UNPACKING ARCHIVE ===
+	$UNPACKAGE $KERNEL_ARC
+	mv $KERNEL linux
+    fi
 
-echo === BUILDING LINUX ===
-cp kernel-config linux/.config
-cd linux
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j4 KCPPFLAGS="-fno-pic -Wno-pointer-sign"
+    echo === BUILDING LINUX ===
+    cp kernel-config linux/.config
+    cd linux
+    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j4 KCPPFLAGS="-fno-pic -Wno-pointer-sign"
+fi
