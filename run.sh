@@ -1,6 +1,5 @@
 #!/bin/sh
 
-QEMU=/home/pranith/devops/code/qemu/build/aarch64-softmmu/qemu-system-aarch64
 NCPUS=4
 MTTCG=off
 
