@@ -1,0 +1,35 @@
+language: cpp
+cache: ccache
+sudo: required
+dist: trusty
+addons:
+    apt:
+        sources:
+        - ubuntu-toolchain-r-test
+        packages:
+        - g++-4.9
+        - clang-3.5
+        - gcc-aarch64-linux-gnu
+        - g++-aarch64-linux-gnu
+        - bc
+        - git
+before_install:
+    - git clone --recursive https://github.com/qemu/qemu
+    - cd qemu
+    - mkdir build
+    - cd build
+    - ../configure --target-list=aarch64-softmmu
+    - make -j3
+    - export QEMU=`pwd`/aarch64-softmmu/qemu-system-aarch64
+    - cd ../..
+script:
+    - ./run.sh
+compiler:
+- clang
+- gcc
+notifications:
+    email:
+        recipients:
+            - bobby.prani@gmail.com
+        on_success: change
+        on_failure: always
