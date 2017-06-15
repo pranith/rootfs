@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Busybox version: 1.24.1
-# Tue Jun 13 12:15:59 2017
+# Thu Jun 15 15:46:38 2017
 #
 CONFIG_HAVE_DOT_CONFIG=y
 
@@ -686,8 +686,8 @@ CONFIG_FEATURE_LESS_MAXLINES=0
 # CONFIG_NANDDUMP is not set
 # CONFIG_RFKILL is not set
 # CONFIG_SETSERIAL is not set
-# CONFIG_TASKSET is not set
-# CONFIG_FEATURE_TASKSET_FANCY is not set
+CONFIG_TASKSET=y
+CONFIG_FEATURE_TASKSET_FANCY=y
 # CONFIG_UBIATTACH is not set
 # CONFIG_UBIDETACH is not set
 # CONFIG_UBIMKVOL is not set
@@ -751,7 +751,7 @@ CONFIG_FEATURE_BEEP_LENGTH_MS=0
 # CONFIG_RX is not set
 # CONFIG_SETSID is not set
 # CONFIG_STRINGS is not set
-# CONFIG_TIME is not set
+CONFIG_TIME=y
 # CONFIG_TIMEOUT is not set
 # CONFIG_TTYSIZE is not set
 # CONFIG_VOLNAME is not set
