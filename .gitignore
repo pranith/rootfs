@@ -1,0 +1,7 @@
+kernel/linux
+initrd/busybox
+initrd/sbin
+initrd/initrd.cpio
+*.xz
+*.gz
+*.bz2
