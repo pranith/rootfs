@@ -7,7 +7,15 @@ echo === KERNEL ===
 KERNEL=linux-4.11.4
 KERNEL_ARC=$KERNEL.tar.xz
 KERNEL_URL=https://www.kernel.org/pub/linux/kernel/v4.x/$KERNEL_ARC
+
 UNPACKAGE="tar -xf"
+if [ "$1" = "arm64" ]; then
+    ARCH=arm64
+    CROSS=aarch64-linux-gnu-
+else
+    ARCH=x86
+    CROSS=
+fi
 
 INITRD=`pwd`/initrd/initrd.cpio
 
@@ -27,8 +35,8 @@ if [ ! -e $INITRD ]; then
     fi
 
     echo === BUILDING LINUX ===
-    cp kernel-config linux/.config
+    cp ${ARCH}-config linux/.config
     cd linux
-    make olddefconfig ARCH=arm64
-    make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j4 KCPPFLAGS="-fno-pic -Wno-pointer-sign"
+    make olddefconfig ARCH=$ARCH
+    make ARCH=$ARCH CROSS_COMPILE=$CROSS -j4 KCPPFLAGS="-fno-pic -Wno-pointer-sign"
 fi
