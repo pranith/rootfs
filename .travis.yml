@@ -19,12 +19,13 @@ before_install:
     - cd qemu
     - mkdir build
     - cd build
-    - ../configure --target-list=aarch64-softmmu
+    - ../configure --target-list=aarch64-softmmu,x86_64-softmmu
     - make -j3
-    - export QEMU=`pwd`/aarch64-softmmu/qemu-system-aarch64
+    - export QEMU_BUILD_DIR=`pwd`
     - cd ../..
 script:
-    - ./run.sh
+    - ./run.sh x86
+    - ./run.sh arm64
 compiler:
 - clang
 - gcc
