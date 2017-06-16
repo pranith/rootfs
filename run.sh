@@ -1,11 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 # Set QEMU_BUILD_DIR to the build directory
 
 #QEMU_BUILD_DIR=
 
 ARCH=arm64
-NCPUS=2
+NCPUS=1
 MTTCG=off
+
 if [ "$1" = "x86" ]; then
     ARCH=x86
     QEMU=$QEMU_BUILD_DIR/x86_64-softmmu/qemu-system-x86_64
@@ -20,10 +21,16 @@ elif [ "$1" = "arm64" ]; then
     MACHINE=virt,gic_version=3
 fi
 
-cd kernel && ./getkernel.sh $ARCH && cd ..
-cd initrd && ./getbusybox.sh $ARCH && cd ..
+function buildComponents {
+    cd kernel && ./getkernel.sh $ARCH && cd ..
+    cd initrd && ./getbusybox.sh $ARCH && cd ..
+}
 
+if [ "$2" = "build" ]; then
+    buildComponents
+fi
+    
 echo === RUNNING QEMU ===
 $QEMU -kernel $KERNEL_IMG -initrd initrd/initrd.cpio \
-      -m 512 -M $MACHINE -cpu $CPU -append "init=/init console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1" \
-      -nographic -smp $NCPUS
+      -m 2048 -M $MACHINE -cpu $CPU -append "init=/init console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1" \
+      -nographic -smp $NCPUS # --enable-kvm

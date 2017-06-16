@@ -13,4 +13,9 @@ PATH=/sbin
 
 export NCPUS=`grep processor /proc/cpuinfo | wc -l`
 
+time /sbin/page_faults
+time /sbin/page_faults
+time /sbin/page_faults
+time /sbin/page_faults
+time /sbin/page_faults
 poweroff -f
