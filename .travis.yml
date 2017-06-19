@@ -24,8 +24,8 @@ before_install:
     - export QEMU_BUILD_DIR=`pwd`
     - cd ../..
 script:
-    - ./run.sh x86
-    - ./run.sh arm64
+    - ./run.sh x86 build
+    - ./run.sh arm64 build
 compiler:
 - clang
 - gcc
