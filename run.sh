@@ -31,6 +31,6 @@ if [ "$2" = "build" ]; then
 fi
     
 echo === RUNNING QEMU ===
-$QEMU -kernel $KERNEL_IMG -initrd initrd/initrd.cpio \
-      -m 2048 -M $MACHINE -cpu $CPU -append "init=/init console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1" \
+$QEMU -kernel $KERNEL_IMG \
+      -m 2048 -M $MACHINE -cpu $CPU -append "console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1" \
       -nographic -smp $NCPUS # --enable-kvm
