@@ -7,7 +7,9 @@ echo === INITRD ===
 
 ARCH=
 CROSS=
-if [ $1  == "arm64" ]; then
+HOST_ARCH=`uname -m`
+NPROC=`nproc`
+if [ $1  = "arm64" ] && [ $HOST_ARCH != "aarch64" ]; then
     ARCH=arm64
     CROSS=aarch64-linux-gnu-
 fi
@@ -37,7 +39,7 @@ cp busybox-config busybox/.config
 echo == BUILDING ==
 mkdir -p sbin
 cd busybox
-make -j4 ARCH=$ARCH CROSS_COMPILE=$CROSS
+make -j${NPROC} ARCH=$ARCH CROSS_COMPILE=$CROSS
 cp busybox ../sbin/
 cd ../
-make clean && make $ARCH
+make clean && make -j${NPROC} $ARCH

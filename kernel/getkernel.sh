@@ -4,16 +4,17 @@ echo === KERNEL ===
 #KERNEL=linux-4.12-rc5
 #KERNEL_ARC=$KERNEL.tar.gz
 #KERNEL_URL=https://git.kernel.org/torvalds/t/$KERNEL_ARC
-KERNEL=linux-4.11.4
+KERNEL=linux-5.5.2
 KERNEL_ARC=$KERNEL.tar.xz
-KERNEL_URL=https://www.kernel.org/pub/linux/kernel/v4.x/$KERNEL_ARC
+KERNEL_URL=https://www.kernel.org/pub/linux/kernel/v5.x/$KERNEL_ARC
 
+HOST_ARCH=`uname -m`
 UNPACKAGE="tar -xf"
-if [ "$1" = "arm64" ]; then
-    ARCH=arm64
+ARCH=$1
+NPROC=`nproc`
+if [ $1 = "arm64" ] && [ $HOST_ARCH != "aarch64" ]; then
     CROSS=aarch64-linux-gnu-
 else
-    ARCH=x86
     CROSS=
 fi
 
@@ -38,5 +39,5 @@ if [ ! -e $INITRD ]; then
     cp ${ARCH}-config linux/.config
     cd linux
     make olddefconfig ARCH=$ARCH
-    make ARCH=$ARCH CROSS_COMPILE=$CROSS -j4 KCPPFLAGS="-fno-pic -Wno-pointer-sign"
+    make ARCH=$ARCH CROSS_COMPILE=$CROSS -j${NPROC} KCPPFLAGS="-fno-pic -Wno-pointer-sign"
 fi
