@@ -17,8 +17,8 @@ elif [ "$1" = "arm64" ]; then
     ARCH=arm64
     QEMU=$QEMU_BUILD_DIR/aarch64-softmmu/qemu-system-aarch64
     KERNEL_IMG=kernel/linux/arch/arm64/boot/Image
-    CPU=cortex-a57
-    MACHINE=virt,gic_version=3
+    CPU=max
+    MACHINE=virt,gic-version=3
 fi
 
 function buildComponents {
