@@ -13,4 +13,6 @@ PATH=/sbin
 
 export NCPUS=`grep processor /proc/cpuinfo | wc -l`
 
+/sbin/sh
+
 poweroff -f

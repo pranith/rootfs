@@ -4,7 +4,7 @@ echo === KERNEL ===
 #KERNEL=linux-4.12-rc5
 #KERNEL_ARC=$KERNEL.tar.gz
 #KERNEL_URL=https://git.kernel.org/torvalds/t/$KERNEL_ARC
-KERNEL=linux-5.5.2
+KERNEL=linux-5.11.13
 KERNEL_ARC=$KERNEL.tar.xz
 KERNEL_URL=https://www.kernel.org/pub/linux/kernel/v5.x/$KERNEL_ARC
 

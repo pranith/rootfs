@@ -1,7 +1,7 @@
 #!/bin/bash
 # Set QEMU_BUILD_DIR to the build directory
 
-#QEMU_BUILD_DIR=
+QEMU_BUILD_DIR=/home/pranith/workspace/code/qemu/relbuild/
 
 ARCH=arm64
 NCPUS=1
@@ -32,5 +32,5 @@ fi
     
 echo === RUNNING QEMU ===
 $QEMU -kernel $KERNEL_IMG \
-      -m 2048 -M $MACHINE -cpu $CPU -append "console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1" \
-      -nographic -smp $NCPUS # --enable-kvm
+      -m 2048 -M $MACHINE -cpu $CPU -append "console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1 init=/init/" \
+      -nographic -smp $NCPUS -initrd initrd/initrd.cpio # --enable-kvm

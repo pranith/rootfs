@@ -14,7 +14,7 @@ if [ $1  = "arm64" ] && [ $HOST_ARCH != "aarch64" ]; then
     CROSS=aarch64-linux-gnu-
 fi
 
-BBOX=busybox-1.24.1
+BBOX=busybox-1.32.1
 BBOX_ARCHIVE=$BBOX.tar.bz2
 BBOX_URL=https://www.busybox.net/downloads/$BBOX_ARCHIVE
 
