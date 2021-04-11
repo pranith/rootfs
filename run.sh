@@ -32,5 +32,6 @@ fi
     
 echo === RUNNING QEMU ===
 $QEMU -kernel $KERNEL_IMG \
-      -m 2048 -M $MACHINE -cpu $CPU -append "console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1 init=/init/" \
+      -m 2048 -M $MACHINE -cpu $CPU \
+      -append "console=tty0 console=ttyAMA0 console=ttyS0 ignore_loglevel initcall_debug=1 init=/init/" \
       -nographic -smp $NCPUS # --enable-kvm
