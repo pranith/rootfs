@@ -38,8 +38,8 @@ cp busybox-config busybox/.config
 
 echo == BUILDING ==
 mkdir -p sbin
-cd busybox
+pushd busybox
 make -j${NPROC} ARCH=$ARCH CROSS_COMPILE=$CROSS
 cp busybox ../sbin/
-cd ../
+popd
 make clean && make -j${NPROC} $ARCH
